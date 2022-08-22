@@ -1,0 +1,21 @@
+{
+  "name": "mocha-pptr",
+  "version": "1.0.0",
+  "description": "Test Framework with mocha steps and builder class pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mocha",
+    "puppeteer",
+    "framework"
+  ],
+  "author": "Aby",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "puppeteer": "^16.2.0"
+  }
+}
