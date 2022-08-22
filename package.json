@@ -4,7 +4,9 @@
   "description": "Test Framework with mocha steps and builder class pattern",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/mocha/bin/mocha --timeout=60000 --require mocha-steps ./build/tests/**.js",
+    "clean": "Rmdir /S build",
+    "build": "babel --preset es2015 -d build/ src/"
   },
   "keywords": [
     "mocha",
@@ -16,6 +18,11 @@
   "dependencies": {
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
+    "mocha-steps": "^1.3.0",
     "puppeteer": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }
