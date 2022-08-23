@@ -1,32 +1,44 @@
-const { step } = require('mocha-steps');
-const puppeteer = require('puppeteer');
+import { expect } from 'chai'
+import { step } from 'mocha-steps'
 
-describe('Mocha Steps Demo', () => {
-  let browser;
-  let page;
-  before(async function () {
-    browser = await puppeteer.launch({
-      headless: true,
-      slowMo: 0,
-      devtools: false,
-    });
-    page = await browser.newPage();
-    await page.setDefaultTimeout(7000);
-    await page.setDefaultNavigationTimeout(7000);
-  });
-  after(async function () {
-    await browser.close();
-  });
-  step('should load google homepage', async function () {
-    await page.goto('https://google.com');
-  });
-  step('Step 2 should Fail', async function () {
-    await page.waitForSelector('#FAIL');
-  });
-  step('Step 3', async function () {
-    console.log('From Step 3');
-  });
-  step('Step 4', async function () {
-    console.log('From Step 4');
-  });
-});
+import Page from '../builder'
+
+import LoginPage from '../pages/LoginPage'
+
+describe('End-to-end Test', () => {
+  let page
+  let loginPage
+
+  before(async () => {
+    page = await Page.build('Desktop')
+    loginPage = await new LoginPage(page)
+  })
+
+  after(async () => {
+    await page.close()
+  })
+
+  step('should load google homepage', async () => {
+    await page.goto('http://zero.webappsecurity.com/index.html')
+    const signInButton = await page.isElementVisible('#signin_button')
+    expect(signInButton).to.be.true
+  })
+
+  step('should display login form', async () => {
+    await page.waitAndClick('#signin_button')
+    const loginForm = await page.isElementVisible('#login_form')
+    expect(loginForm).to.be.true
+    const signInButton = await page.isElementVisible('#signin_button')
+    expect(signInButton).to.be.false
+  })
+
+  step('should login to application', async () => {
+    await loginPage.login('username', 'password')
+    const navbar = await page.isElementVisible('.nav-tabs')
+    expect(navbar).to.be.true
+  })
+
+  step('should have 6 navabr links', async () => {
+    expect(await page.getCount('.nav-tabs li')).to.equal(6)
+  })
+})
