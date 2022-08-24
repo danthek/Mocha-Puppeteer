@@ -42,3 +42,25 @@ describe('End-to-end Test', () => {
     expect(await page.getCount('.nav-tabs li')).to.equal(6)
   })
 })
+
+describe('Mocha Steps Demo', () => {
+  let page
+  before(async function () {
+    page = await Page.build('Desktop')
+  })
+  after(async function () {
+    await page.close()
+  })
+  step('should load google homepage', async function () {
+    await page.goto('https://google.com')
+  })
+  step('Step 2 should Fail', async function () {
+    await page.waitForSelector('#FAIL')
+  })
+  step('Step 3', async function () {
+    console.log('From Step 3')
+  })
+  step('Step 4', async function () {
+    console.log('From Step 4')
+  })
+})
