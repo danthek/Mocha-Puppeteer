@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer'
 export default class Launcher {
   static async build(viewport) {
     const launchOptions = {
-      headless: true,
+      headless: false,
       slowMo: 0,
       args: [
         '--no-sandbox',
