@@ -91,9 +91,10 @@ export default class Launcher {
     await this.page.waitForXPath(xpath)
     const elements = await this.page.$x(xpath)
     if (elements.length > 1) {
+      // to see of there are a more than one xptahs
       console.warn('waitForXPathAndClick returned more than one result')
     }
-    await elements[0].click()
+    await elements[0].click() // clicks in the first xpath that finds
   }
 
   async isElementVisible(selector) {
