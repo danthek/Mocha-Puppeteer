@@ -1,5 +1,6 @@
 export default class LoginPage {
   constructor(page) {
+    // we need a constructor to access the page, which basically we created on the "before()"
     this.page = page
   }
 

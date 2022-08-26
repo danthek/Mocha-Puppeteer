@@ -32,7 +32,7 @@ describe('End-to-end Test', () => {
 
   before(async () => {
     page = await Page.build('Desktop') // we will build our new browser page with the instructions insde build and as a desktop viewport
-    loginPage = await new LoginPage(page)
+    loginPage = await new LoginPage(page) //passed page as an argument
   })
 
   after(async () => {
