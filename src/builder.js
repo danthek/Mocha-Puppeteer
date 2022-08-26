@@ -102,15 +102,16 @@ export default class Launcher {
     await this.page
       .waitForSelector(selector, { visible: true, timeout: 3000 })
       .catch(() => {
+        // we catch the error and later we can also use it in an assertion
         visible = false
       })
     return visible
   }
 
-  async isXPathVisible(selector) {
+  async isXPathVisible(xpath) {
     let visible = true
     await this.page
-      .waitForXPath(selector, { visible: true, timeout: 3000 })
+      .waitForXPath(xpath, { visible: true, timeout: 3000 })
       .catch(() => {
         visible = false
       })
